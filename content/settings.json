@@ -1,0 +1,10 @@
+{
+  "title": "RootSocket",
+  "url": "docs.rootsocket.com",
+  "logo": {
+    "light": "/logo-light.svg",
+    "dark": "/logo-dark.svg"
+  },
+  "github": "rootsocket/docs",
+  "twitter": "@nuxt_js"
+}
