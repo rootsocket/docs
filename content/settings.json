@@ -1,9 +1,5 @@
 {
   "title": "RootSocket",
-  "url": "docs.rootsocket.com",
-  "logo": {
-    "light": "/logo-light.svg",
-    "dark": "/logo-dark.svg"
-  },
+  "url": "rootsocket.com/docs",
   "github": "rootsocket/docs"
 }
