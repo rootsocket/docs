@@ -26,14 +26,13 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
 
-      - name: Move to project
-        run: cd project && ls
-
       - name: Get yarn cache directory path
+        working-directory: ./project
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache node_modules
+        working-directory: ./project
         uses: actions/cache@v2.1.4
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -43,19 +42,19 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
+        working-directory: ./project
         run: yarn
 
       - name: Generate dist
+        working-directory: ./project
         run: yarn generate
 
       - name: Set git values
+        working-directory: ./project
         run: |
           echo "USER_EMAIL=$(git log -n 1 --pretty=format:%ae)" >> $GITHUB_ENV
           echo "USER_NAME=$(git log -n 1 --pretty=format:%an)" >> $GITHUB_ENV
           echo "LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
-
-      - name: Move to root dir
-        run: cd ..
 
       - name: Checkout deployment project
         uses: actions/checkout@master
@@ -65,6 +64,7 @@ jobs:
           path: ./rootsocket.pages
 
       - name: Copy files
+        working-directory: ./rootsocket.pages
         run: |
           cp -R project/dist/ ./rootsocket.pages
           git add .
