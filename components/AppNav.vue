@@ -61,7 +61,7 @@
               >Home</a
             >
             <a
-              href="https://blog.rootsocket.com"
+              href="https://rootsocket.com/blog"
               class="font-semibold leading-none text-gray-700 dark:text-gray-300 hover:text-primary-500 dark-hover:text-primary-500 text-base"
               exact-active-class="text-primary-500"
               >Blog</a
