@@ -17,12 +17,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+        path: ./project
 
       - name: Setup node env
         uses: actions/setup-node@v2.1.5
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
+
+      - name: Move to project
+        run: cd project
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -49,6 +53,9 @@ jobs:
           echo "USER_NAME=$(git log -n 1 --pretty=format:%an)" >> $GITHUB_ENV
           echo "LAST_COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
 
+      - name: Move to root dir
+        run: cd ..
+
       - name: Checkout deployment project
         uses: actions/checkout@master
         with: 
@@ -58,7 +65,7 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -R dist/ ./rootsocket.pages
+          cp -R project/dist/ ./rootsocket.pages
           git add .
           git config user.name ${{ env.USER_NAME }}
           git config user.email ${{ env.USER_EMAIL }}
