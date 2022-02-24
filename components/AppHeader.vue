@@ -8,7 +8,7 @@
       <div class="flex items-center justify-between h-16">
         <div class="lg:w-1/5 flex items-center pr-4" @click.stop="noop">
           <a
-            to="https://rootsocket.com"
+            href="https://rootsocket.com"
             class="flex-shrink-0 flex-1 font-bold text-xl flex flex-row items-center"
             :aria-label="`${settings.title} Logo`"
           >
