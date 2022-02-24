@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: project
 
     strategy:
       matrix:
@@ -17,8 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-        with:
-          path: ./project
 
       - name: Setup node env
         uses: actions/setup-node@v2.1.5
@@ -27,12 +28,10 @@ jobs:
           check-latest: true
 
       - name: Get yarn cache directory path
-        working-directory: ./project
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache node_modules
-        working-directory: ./project
         uses: actions/cache@v2.1.4
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -42,15 +41,12 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        working-directory: ./project
         run: yarn
 
       - name: Generate dist
-        working-directory: ./project
         run: yarn generate
 
       - name: Set git values
-        working-directory: ./project
         run: |
           echo "USER_EMAIL=$(git log -n 1 --pretty=format:%ae)" >> $GITHUB_ENV
           echo "USER_NAME=$(git log -n 1 --pretty=format:%an)" >> $GITHUB_ENV
@@ -61,12 +57,12 @@ jobs:
         with: 
           repository: rootsocket/rootsocket.pages
           token: ${{ secrets.TOKEN_DEPLOYMENT }}
-          path: ./rootsocket.pages
+          path: ../rootsocket.pages
 
       - name: Copy files
-        working-directory: ./rootsocket.pages
+        working-directory: ../rootsocket.pages
         run: |
-          cp -R project/dist/ ./rootsocket.pages
+          cp -R ../project/dist/ .
           git add .
           git config user.name ${{ env.USER_NAME }}
           git config user.email ${{ env.USER_EMAIL }}
