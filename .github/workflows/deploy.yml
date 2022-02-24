@@ -8,9 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: project
 
     strategy:
       matrix:
@@ -57,12 +54,12 @@ jobs:
         with: 
           repository: rootsocket/rootsocket.pages
           token: ${{ secrets.TOKEN_DEPLOYMENT }}
-          path: ../rootsocket.pages
+          path: ./rootsocket.pages
 
       - name: Copy files
-        working-directory: ../rootsocket.pages
+        working-directory: ./rootsocket-pages
         run: |
-          cp -R ../project/dist/ .
+          cp -R ../dist/ .
           git add .
           git config user.name ${{ env.USER_NAME }}
           git config user.email ${{ env.USER_EMAIL }}
