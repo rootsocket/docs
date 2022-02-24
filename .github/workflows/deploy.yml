@@ -51,10 +51,10 @@ jobs:
 
       - name: Checkout deployment project
         uses: actions/checkout@master
-          with: 
-            repository: rootsocket/rootsocket.pages
-            token: ${{ secrets.TOKEN_DEPLOYMENT }}
-            path: ./rootsocket.pages
+        with: 
+          repository: rootsocket/rootsocket.pages
+          token: ${{ secrets.TOKEN_DEPLOYMENT }}
+          path: ./rootsocket.pages
 
       - name: Copy files
         run: |
