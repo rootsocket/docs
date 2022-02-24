@@ -27,4 +27,11 @@ export default theme({
     ],
     defaultLocale: "en",
   },
+  build: {
+    splitChunks: {
+      layouts: false,
+      pages: false,
+      commons: false,
+    }
+  }
 });
