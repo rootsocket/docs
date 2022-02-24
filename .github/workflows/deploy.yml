@@ -57,7 +57,7 @@ jobs:
           path: ./rootsocket.pages
 
       - name: Copy files
-        working-directory: ./rootsocket-pages
+        working-directory: ./rootsocket.pages
         run: |
           cp -R ../dist/ .
           git add .
