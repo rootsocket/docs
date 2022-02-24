@@ -57,7 +57,7 @@ jobs:
       - name: Copy files
         working-directory: ./rootsocket.pages
         run: |
-          cp -R ../dist/ .
+          cp -R ../dist/ ./docs
           git add .
           git config user.name github-actions
           git config user.email contact@rootsocket.com
