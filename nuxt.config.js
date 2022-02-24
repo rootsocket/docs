@@ -8,7 +8,7 @@ export default theme({
     base: '/docs',
   },
   head: {
-    link: [{ rel: "icon", type: "image/x-icon", href: "/docs/favicon.ico" }],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   i18n: {
     locales: () => [
