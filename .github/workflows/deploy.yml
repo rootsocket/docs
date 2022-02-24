@@ -60,6 +60,6 @@ jobs:
           cp -R ../dist/ .
           git add .
           git config user.name github-actions
-          git config user.email github-actions@github.com
-          git commit -m ${{ env.LAST_COMMIT_MESSAGE }}
+          git config user.email contact@rootsocket.com
+          git commit -m "${{ env.LAST_COMMIT_MESSAGE }}"
           git push
