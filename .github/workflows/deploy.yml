@@ -27,7 +27,7 @@ jobs:
           check-latest: true
 
       - name: Move to project
-        run: cd project
+        run: cd project && ls
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
