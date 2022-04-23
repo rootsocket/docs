@@ -1,0 +1,137 @@
+---
+title: JavaScript
+description: "How to implement RootSocket into your use cases in JavaScript"
+position: 4
+category: "Client"
+tags:
+    - javascript
+    - vue
+    - react
+    - react native
+    - angular
+    - svelte
+    - websocket
+---
+
+Library that enables clients using a browser or any other environment that supports JavaScript to connect and communicate through WebSockets.
+
+You can view, edit and learn more about it here: https://github.com/rootsocket/rootsocketjs
+
+## Installation
+
+How to install RootSocket in your projects.
+
+<blockquote><b>TIP:</b> You can override settings and accept raw messages, modify ping intervals or anything you need.</blockquote>
+
+<code-group>
+  <code-block label="Yarn" active>
+
+  ```bash
+  yarn add @rootsocket/websocket
+  ```
+
+  </code-block>
+
+  <code-block label="NPM">
+
+  ```bash
+  npm install @rootsocket/websocket
+  ```
+
+  </code-block>
+</code-group>
+
+## `new RootSocket(options)`
+
+Default options:
+
+```typescript
+interface RootSocketConstructor {
+  server?: string = 'rootsocket.com';
+  debug?: boolean = false;
+  fetchOptions?: RequestInit = {};
+  disableTLS?: boolean = false;
+  webSocketClass?: WebSocket = WebSocket;
+  fetcher?: (url: string, options?: RequestInit) => Promise<Response> = fetch;
+  channelUrl?: string = '';
+  connectionUrl: string;
+}
+```
+
+* `server`: indicates the main domain that will be used for WebSocket connections, unless you are an enterprise customer you won't need to change it.
+* `debug`: will enable additional logs, should be disabled in production.
+* `fetchOptions`: fetch options are the options used to request a connection or channel token.
+* `disableTLS`: if you use a custom server and you want to disable secure connections.
+* `webSocketClass`: a custom class that should follow the WebSocket interface.
+* `fetcher`: a function that accepts a url as the first parameter and optional request options.
+* `channelUrl`: endpoint used to authenticate users before they try to subscribe if that option is enabled.
+* `connectionUrl`: endpoint used to retrieve a connection token that will be used to connect to RootSocket servers.
+
+## `connect(): Promise<void>`
+
+* Returns `Promise`
+
+Requests a connection token from the `connectionUrl` endpoint and connects to RootSocket servers with that token.
+
+```typescript
+const rs = new RootSocket(options)
+await rs.connect()
+```
+
+## `send(channel: string, raw: unknown): Promise<void>`
+
+Sends a message to the given channel, client must be subscribed first.
+
+```typescript
+const rs = new RootSocket(options)
+await rs.connect()
+await rs.send("channel", {hello: "world"})
+```
+
+<blockquote><b>TIP:</b> unknown can be a string or any JSON-compatible structure</blockquote>
+
+<alert type="warning">
+Sending a message to an unstable connection will throw an exception. You can use <code>isConnected()</code> to
+make sure the connection is stable.
+</alert>
+
+## `subscribe(channel: string, func: (data: string) => void): Promise<() => void>`
+
+Requests a channel token from the `channelUrl` endpoint if subscription authentication is enabled and when a new message is received it will call `func`.
+
+```typescript
+const rs = new RootSocket(options)
+await rs.connect()
+await rs.subscribe("channel", (data: string) => {
+    console.log(data)
+})
+```
+
+<blockquote><b>TIP:</b> returned function can be used to unsubscribe that particular <code>func</code> from the channel</blockquote>
+
+## `unsubscribe(channel: string, func: (data: string) => void): Promise<void>`
+
+Unsubscribes `func` from a channel.
+
+```typescript
+const rs = new RootSocket(options)
+await rs.connect()
+const func = (data: string) => {
+    console.log(data)
+}
+// make sure you use the same function
+// you subscribed with, arrow functions
+// are regenerated.
+await rs.unsubscribe("channel", func)
+```
+
+## `unsubscribeAll(channel: string): Promise<void>`
+
+Unsubscribes all functions from the channel.
+
+
+```typescript
+const rs = new RootSocket(options)
+await rs.connect()
+await rs.unsubscribe("channel")
+```

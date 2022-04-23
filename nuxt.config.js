@@ -1,6 +1,10 @@
 import theme from "@nuxt/content-theme-docs";
 
 export default theme({
+  publicRuntimeConfig: {
+    projectApp: 'https://app.rootsocket.com',
+    projectBlog: 'https://rootsocket.com/blog',
+  },
   docs: {
     primaryColor: "#0073e6",
   },
@@ -11,13 +15,14 @@ export default theme({
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   i18n: {
+    vueI18nLoader: true,
     locales: () => [
-      {
-        code: "fr",
-        iso: "fr-FR",
-        file: "fr-FR.js",
-        name: "Français",
-      },
+      // {
+      //   code: "es",
+      //   iso: "es-ES",
+      //   file: "es-ES.js",
+      //   name: "Español",
+      // },
       {
         code: "en",
         iso: "en-US",
@@ -25,7 +30,7 @@ export default theme({
         name: "English",
       },
     ],
-    defaultLocale: "en",
+    defaultLocale: "en"
   },
   build: {
     splitChunks: {
