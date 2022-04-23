@@ -6,7 +6,7 @@ export default theme({
     projectBlog: 'https://rootsocket.com/blog',
   },
   docs: {
-    primaryColor: "#0073e6",
+    primaryColor: "#007fff",
   },
   router: {
     base: '/docs',
