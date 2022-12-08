@@ -60,12 +60,6 @@
               exact-active-class="text-primary-500"
               >{{ $t('home') }}</a
             >
-            <a
-              href="https://rootsocket.com/blog"
-              class="font-semibold leading-none text-gray-700 dark:text-gray-300 hover:text-primary-500 dark-hover:text-primary-500 text-base"
-              exact-active-class="text-primary-500"
-              >{{ $t('blog') }}</a
-            >
           </div>
         </li>
       </ul>
@@ -114,12 +108,10 @@ export default {
 <i18n>
 {
   "es": {
-    "blog": "Blog",
     "home": "Inicio",
     "more": "Más"
   },
   "en": {
-    "blog": "Blog",
     "home": "Home",
     "more": "More"
   }

@@ -11,18 +11,10 @@
           <a
             :href="$config.projectApp"
             target="_blank"
-            rel="noopener"
+            rel="nofollow"
             class="text-sm text-gray-500 hover:text-primary-500"
           >
             {{ $t('app') }}
-          </a>
-          <a
-            :href="$config.projectBlog"
-            target="_blank"
-            rel="noopener"
-            class="text-sm text-gray-500 hover:text-primary-500"
-          >
-            {{ $t('blog') }}
           </a>
         </div>
       </div>

@@ -7,19 +7,7 @@
     <div class="container mx-auto flex-1 px-4 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="lg:w-1/5 flex items-center pr-4" @click.stop="noop">
-          <a
-            href="https://rootsocket.com"
-            class="flex-shrink-0 flex-1 font-bold text-xl flex flex-row items-center"
-            :aria-label="`${settings.title} Logo`"
-          >
-            <img
-              src="logo.png"
-              class="h-6 max-w-full rounded-full"
-              :alt="settings.title"
-            />
-
-            <span class="text-2xl ml-2">{{ settings.title }}</span>
-          </a>
+          <Logo />
         </div>
         <div
           v-if="settings.layout !== 'single'"
@@ -47,15 +35,6 @@
               'hidden lg:block': settings.layout !== 'single',
             }"
             >{{ $t('home') }}</a
-          >
-          <a
-            href="https://rootsocket.com/blog"
-            class="font-semibold leading-none text-gray-700 dark:text-gray-300 hover:text-primary-500 dark-hover:text-primary-500 text-base mr-4"
-            exact-active-class="text-primary-500"
-            :class="{
-              'hidden lg:block': settings.layout !== 'single',
-            }"
-            >{{ $t('blog') }}</a
           >
           <div class="flex items-center">
             <button
@@ -117,11 +96,9 @@ export default {
 <i18n>
 {
   "es": {
-    "blog": "Blog",
     "home": "Inicio"
   },
   "en": {
-    "blog": "Blog",
     "home": "Home"
   }
 }

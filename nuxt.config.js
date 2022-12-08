@@ -4,6 +4,7 @@ export default theme({
   publicRuntimeConfig: {
     projectApp: 'https://app.rootsocket.com',
     projectBlog: 'https://rootsocket.com/blog',
+    title: 'RootSocket'
   },
   docs: {
     primaryColor: "#007fff",
@@ -12,7 +13,7 @@ export default theme({
     base: '/docs',
   },
   head: {
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   i18n: {
     vueI18nLoader: true,
@@ -30,13 +31,16 @@ export default theme({
         name: "English",
       },
     ],
-    defaultLocale: "en"
+    fallbackLocale: "en",
+    defaultLocale: "en",
+    baseUrl: 'https://rootsocket.com/docs',
   },
   build: {
+    extractCSS: false,
     splitChunks: {
       layouts: false,
-      pages: false,
-      commons: false,
+      pages: true,
+      commons: true,
     }
   }
 });
