@@ -3,7 +3,7 @@ const { withContentlayer } = require('next-contentlayer')
 
 module.exports = withContentlayer({
   images: {
-    domains: ['pbs.twimg.com', 'avatars.githubusercontent.com', 'i.imgur.com'],
+    domains: [],
   },
   headers: async () => [{
     source: '/:path*',
@@ -12,4 +12,5 @@ module.exports = withContentlayer({
       { key: 'Cross-Origin-Embedder-Policy', value: 'same-origin' },
     ],
   }],
+  basePath: '/docs',
 })

@@ -4,18 +4,17 @@ import type { InferGetStaticPropsType } from 'next'
 import { useLiveReload, useMDXComponent } from 'next-contentlayer/hooks'
 import type { FC } from 'react'
 import { allDocs } from 'contentlayer/generated'
-import { Container } from '../../components/common/Container'
-import { defineStaticProps, toParams } from '../../utils/next'
+import { Container } from '../components/common/Container'
+import { defineStaticProps, toParams } from '../utils/next'
 import { DocsNavigation } from 'src/components/docs/DocsNavigation'
-import { Callout } from '../../components/common/Callout'
+import { Callout } from '../components/common/Callout'
 import { DocsCard as Card } from 'src/components/docs/DocsCard'
-import { Card as ChildCard } from '../../components/common/Card'
+import { Card as ChildCard } from '../components/common/Card'
 import { Link } from 'src/components/common/Link'
-import Image from 'next/image'
-import { DocsHeader } from '../../components/docs/DocsHeader'
-import { ChevronLink } from '../../components/common/ChevronLink'
-import { Label } from '../../components/common/Label'
-import { DocsFooter } from '../../components/docs/DocsFooter'
+import { DocsHeader } from '../components/docs/DocsHeader'
+import { ChevronLink } from '../components/common/ChevronLink'
+import { Label } from '../components/common/Label'
+import { DocsFooter } from '../components/docs/DocsFooter'
 import { PageNavigation } from 'src/components/common/PageNavigation'
 import { buildDocsTree } from 'src/utils/build-docs-tree'
 import { H2, H3, H4 } from 'src/components/common/Headings'
@@ -41,7 +40,7 @@ export const getStaticProps = defineStaticProps(async (context) => {
       (_) => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === path,
     )?.nav_title
     const title = allDocs.find((_) => _.pathSegments.map((_: PathSegment) => _.pathName).join('/') === path)?.title
-    breadcrumbs.push({ path: '/docs/' + path, slug, title: navTitle || title })
+    breadcrumbs.push({ path: '/' + path, slug, title: navTitle || title })
   }
   const tree = buildDocsTree(allDocs)
   const childrenTree = buildDocsTree(
@@ -55,7 +54,6 @@ export const getStaticProps = defineStaticProps(async (context) => {
 const mdxComponents = {
   Callout,
   Card,
-  Image,
   Link,
   ChevronLink,
   Label,

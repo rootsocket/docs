@@ -1,24 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-const AnalyticsScripts = () => {
-  if (process.env.NODE_ENV !== 'production') return null
-  return (
-    <>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q3CT19D49H" />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-Q3CT19D49H');
-              `,
-        }}
-      />
-    </>
-  )
-}
-
 class MyDocument extends Document {
   render() {
     return (
@@ -41,8 +22,6 @@ class MyDocument extends Document {
           `,
             }}
           />
-
-          <AnalyticsScripts />
         </Head>
         <body>
           <Main />

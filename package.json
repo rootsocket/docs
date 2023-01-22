@@ -7,6 +7,7 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
+    "export": "next export",
     "check-links": "blc \"http://localhost:3001\" -roe"
   },
   "dependencies": {

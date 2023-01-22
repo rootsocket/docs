@@ -20,7 +20,7 @@ export const buildDocsTree = (docs: Doc[], parentPathNames: string[] = []): Tree
       title: doc.title,
       label: doc.label ?? null,
       excerpt: doc.excerpt ?? null,
-      urlPath: '/docs/' + doc.pathSegments.map((_: PathSegment) => _.pathName).join('/'),
+      urlPath: '/' + doc.pathSegments.map((_: PathSegment) => _.pathName).join('/'),
       collapsible: doc.collapsible ?? null,
       collapsed: doc.collapsed ?? null,
       children: buildDocsTree(
