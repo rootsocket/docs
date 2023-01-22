@@ -58,7 +58,7 @@ jobs:
         working-directory: ./rootsocket.pages
         run: |
           rm -rf docs
-          cp -R ../dist/ docs
+          cp -R ../.next/ docs
           git add .
           git config user.name github-actions
           git config user.email contact@rootsocket.com
