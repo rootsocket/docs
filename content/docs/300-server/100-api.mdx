@@ -1,0 +1,55 @@
+---
+title: API
+excerpt: Information about how to create your own server-side solution with the API.
+---
+
+How to communicate with RootSocket servers from your server.
+
+All actions will be authenticated through a key sent with every request.
+
+## Create connection tokens
+
+Clients need connection tokens to be able to connect to RootSocket servers.
+
+```bash
+curl --request POST \
+  --url https://<region>.rootsocket.com/api/v1/connections/ \
+  --header 'Authorization: <key>'
+```
+
+## Create channel authentication token
+
+If you enable subscription authentication for your applications, a client will
+request a token from your server every time it tries to subscribe.
+
+```bash
+curl --request POST \
+  --url https://<region>.rootsocket.com/api/v1/tokens/ \
+  --header 'Authorization: <key>' \
+  --header 'Content-Type: application/json' \
+  --data '{"category": 1, "channel": "test"}'
+```
+
+## Send messages
+
+You are allowed to send messages to any channel through the HTTP API.
+
+```bash
+curl --request POST \
+  --url https://<region>.rootsocket.com/api/v1/messages/ \
+  --header 'Authorization: <key>' \
+  --header 'Content-Type: application/json' \
+  --data '{"channel": "test", "data": "this is a test"}'
+```
+
+## API Clients
+
+If you use <a href="https://insomnia.rest/" target="_blank">Insomnia</a> you can import the following v4 JSON:
+
+<details>
+  <summary>Insomnia_2022-04-23</summary>
+  
+  ```json
+  {"_type":"export","__export_format":4,"__export_date":"2022-04-23T20:26:12.069Z","__export_source":"insomnia.desktop.app:v2022.2.1","resources":[{"_id":"req_593981570ea74832adb2f4f2c1f09c64","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1650745425532,"created":1649013718081,"url":"{{ _.API_URL }}/api/v1/connections/","name":"Create connection","description":"","method":"POST","body":{},"parameters":[],"headers":[{"id":"pair_c8762f71bb23443c85127de3223e084f","name":"Authorization","value":"{{ _.KEY }}","description":""}],"authentication":{},"metaSortKey":-1649013718081,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"wrk_9675ebd0eed045768bb34bf27d3c4df5","parentId":null,"modified":1640380073256,"created":1640380073256,"name":"WebSockets","description":"","scope":"collection","_type":"workspace"},{"_id":"req_e709184a74604480bc5e27c2d007b5bb","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1650745423994,"created":1650745206573,"url":"{{ _.API_URL }}/api/v1/tokens/","name":"Create channel token","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"category\": 1,\n\t\"channel\": \"test\"\n}"},"parameters":[],"headers":[{"id":"pair_c8762f71bb23443c85127de3223e084f","name":"Authorization","value":"{{ _.KEY }}","description":""},{"name":"Content-Type","value":"application/json","id":"pair_939bd0e24a334c5a90a6ffc9ce025742"}],"authentication":{},"metaSortKey":-1648364488324.25,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_b345f111eed64a819df7fd20d197825c","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1650745200356,"created":1649020146920,"url":"{{ _.API_URL }}/api/v1/messages/","name":"Send messages","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"channel\": \"test\",\n\t\"data\": \"this is a test\"\n}\n"},"parameters":[],"headers":[{"id":"pair_c8762f71bb23443c85127de3223e084f","name":"Authorization","value":"{{ _.KEY }}","description":""},{"name":"Content-Type","value":"application/json","id":"pair_bfcfa3504cf447ab9e9e364992b9415d"}],"authentication":{},"metaSortKey":-1647715258567.5,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_8a94b1de392d4b229378c249d13ec32d","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1650744584904,"created":1649921222780,"url":"{{ _.API_URL }}/api/v1/connections/","name":"Get connections","description":"","method":"GET","body":{},"parameters":[],"headers":[{"id":"pair_c8762f71bb23443c85127de3223e084f","name":"Authorization","value":"{{ _.KEY }}","description":""}],"authentication":{},"metaSortKey":-1647066028810.75,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"env_13f71cd2ef5d80c061e81f6f16ff808f967690f5","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1650744653570,"created":1640380073262,"name":"Base Environment","data":{"API_URL":"http://localhost:8001","WEBSOCKET_URL":"http://localhost:8080"},"dataPropertyOrder":{"&":["API_URL","WEBSOCKET_URL"]},"color":null,"isPrivate":false,"metaSortKey":1640380073262,"_type":"environment"},{"_id":"jar_13f71cd2ef5d80c061e81f6f16ff808f967690f5","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1640380073263,"created":1640380073263,"name":"Default Jar","cookies":[],"_type":"cookie_jar"},{"_id":"spc_91c346f4753b4a76b1ead8634a07be82","parentId":"wrk_9675ebd0eed045768bb34bf27d3c4df5","modified":1640380073259,"created":1640380073259,"fileName":"WebSockets","contents":"","contentType":"yaml","_type":"api_spec"},{"_id":"env_6ebdfd1bfd7c4f5dbec1965309c56214","parentId":"env_13f71cd2ef5d80c061e81f6f16ff808f967690f5","modified":1650744689790,"created":1649013723222,"name":"develop","data":{"API_URL":"http://localhost:8002","KEY":"<key>"},"dataPropertyOrder":{"&":["API_URL","KEY"]},"color":null,"isPrivate":false,"metaSortKey":1649013723222,"_type":"environment"},{"_id":"env_10b2ad2d47444739b71458ff36dc0933","parentId":"env_13f71cd2ef5d80c061e81f6f16ff808f967690f5","modified":1650744702659,"created":1650744657141,"name":"production","data":{"API_URL":"https://region.rootsocket.com","KEY":"<key>"},"dataPropertyOrder":{"&":["API_URL","KEY"]},"color":null,"isPrivate":false,"metaSortKey":1649013723272,"_type":"environment"}]}
+  ```
+</details>

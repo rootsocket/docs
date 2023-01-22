@@ -1,0 +1,95 @@
+---
+title: Architecture
+excerpt: Learn more about connections, events, channels, authentication and configurations.
+---
+
+How the current architecture helps you send and receive messages in a secure way inside or outside of your infrastructure.
+
+In this section you will learn more about the following features:
+
+- Connection
+- Channels
+- Events
+- Authentication
+- Configuration
+
+## Connection
+
+A connection means that a client connected to the RootSocket servers and it is able to communicate.
+
+There are three actors, first we have a client (device that wants to connect to a WebSocket), a server (your server) and a RootSocket server.
+
+A client won't be able to connect to a WebSocket without a connection token. Every connection token must be created with a key, usually this key is private and
+saved in your server.
+
+Connection tokens are valid for a small amount of time (up to 5 minutes) and it can be reused in that time window if for some reason
+the client has problems to connect but it won't allow multiple clients to connect with the same token.
+
+After a client connects with a token you will be able to see the connection in your application in real-time.
+
+If you need to create connections from the client directly (<span style={{color: 'red'}}>this will allow anyone to create <b>UNLIMITED CONNECTIONS</b>, we strongly suggest against this option unless it is an internal service and you trust your users</span>) you can make requests to our API endpoint to generate a token with your private key.
+
+<Callout>
+  Remember that we do not guarantee a connection to be open for an undefined amount of time, we upgrade servers and
+  applications which may disconnect WebSockets.
+</Callout>
+
+## Channels
+
+A channel is used to send and receive messages. Anybody subscribed to a channel will be able to receive and send messages to it.
+
+Channel names are limited to alphanumeric characters. This is the exact regular expression we use to verify that a name is valid:
+
+```js
+^[a-zA-Z0-9.]{0,100}$
+```
+
+## Events
+
+An event is what we call packets of information that travel between a client and a server.
+
+There are multiple type of events but you won't need to know anything about them unless you want to implement your own solution.
+
+Events use JSON to encode information, each event follows a structure and depending on which type we receive it will contain information in different fields:
+
+```json
+{
+  "event": "<type>",
+  "data": {
+    "detail": "<errors>",
+    "where": "<errors>",
+    "channel": "<subscriptions>",
+    "raw": "<messages>",
+    "auth": "<subscriptions>"
+  }
+}
+```
+
+All event types are listed below, if there is no match for any type it will be considered a message event, this means that it will contain raw data that needs to be
+sent to a channel.
+
+```json
+["ping", "pong", "subscription-add", "subscription-remove", "disconnect", "error"]
+```
+
+<Callout>
+  There is a hard size limit for all events at 1MB. Any event with a size above that limit will be dropped.
+</Callout>
+
+## Authentication
+
+Subscriptions are authenticated by default but can be disabled. This means that, unless you change the settings of your application, the client will need to send
+an authentication token every time it tries to subscribe to a channel.
+
+Each authentication channel should be provided by your server when a client tries to subscribe, this token should be requested before the subscription event is
+sent to the RootSocket server.
+
+Our libraries automatically handle this for you.
+
+## Configuration
+
+Each application can have a configuration.
+
+You can enable if a client is able to send events to the RootSocket server, if it is allowed to subscribe to channels or if it needs to authenticate for subscriptions.
+
+You can access this options in your application settings.
