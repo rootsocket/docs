@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -49,7 +49,7 @@ jobs:
 
       - name: Checkout deployment project
         uses: actions/checkout@master
-        with: 
+        with:
           repository: rootsocket/rootsocket.pages
           token: ${{ secrets.TOKEN_DEPLOYMENT }}
           path: ./rootsocket.pages
