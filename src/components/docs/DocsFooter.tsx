@@ -4,7 +4,7 @@ import { Icon } from '../common/Icon'
 import { format } from 'date-fns'
 import { Doc } from 'contentlayer/generated'
 
-const githubBranch = 'master'
+const githubBranch = 'main'
 const githubBaseUrl = `https://github.com/rootsocket/docs/blob/${githubBranch}/content/`
 
 export const DocsFooter: FC<{ doc: Doc }> = ({ doc }) => {
