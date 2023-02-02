@@ -5,7 +5,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en" className="scroll-padding">
         <Head>
-          <link rel="icon" href="/favicon/favicon.ico" />
+          <link rel="icon" href="/favicon.ico" />
           <meta name="application-name" content="&nbsp;" />
           <meta name="msapplication-TileColor" content="#FFFFFF" />
           <link rel="preload" href="/fonts/virgil.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
