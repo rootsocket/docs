@@ -72,7 +72,7 @@ const Page: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ doc, tree, b
   const MDXContent = useMDXComponent(doc.body.code || '')
 
   return (
-    <Container title={doc.title + ' – Contentlayer'} description={doc.excerpt}>
+    <Container title={doc.title + ' - RootSocket'} description={doc.excerpt}>
       <div className="relative mx-auto w-full container lg:flex lg:items-start">
         <div
           style={{ height: 'calc(100vh - 64px)' }}
