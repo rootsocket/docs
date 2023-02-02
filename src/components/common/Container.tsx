@@ -8,15 +8,14 @@ import { Footer } from './Footer'
 export const Container: FC<any> = ({ children, ...customMeta }) => {
   const router = useRouter()
 
-  const baseUrl = `https://www.contentlayer.dev`
+  const baseUrl = `https://rootsocket.com`
 
   const meta = {
-    title: 'Contentlayer makes content easy for developers',
+    title: 'RootSocket - WebSockets, made easy!',
     description:
-      'Contentlayer is a content SDK that validates and transforms your content into type-safe JSON data you can easily import into your application.',
+      'We extend the protocol and help you deliver low latency messages. Spend less time and use our solution.',
     url: customMeta.urlPath ? `${baseUrl}${customMeta.urlPath}` : baseUrl,
-    name: 'Contentlayer',
-    image: customMeta.imagePath ? `${baseUrl}${customMeta.imagePath}` : `${baseUrl}/images/beta-launch-post-meta.png`,
+    name: 'RootSocket',
     type: 'website',
     ...customMeta,
   }
